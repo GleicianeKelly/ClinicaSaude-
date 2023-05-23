@@ -5,11 +5,14 @@ import com.api.msatendimento.model.Atendimento;
 import com.api.msatendimento.repository.AtendimentoRepository;
 
 //import io.swagger.model.AtendimentoRequest;
+import io.swagger.model.AtendimentoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -23,9 +26,16 @@ public class AtendimentoService {
     //private PacienteFeign pacienteFeign;
 
     public void save(Atendimento entity) {
+        UUID uuid = UUID.randomUUID();
+        entity.setUuid(uuid.toString());
+        entity.setData(LocalDateTime.now());
         atendimentoRepository.insert(entity);
     }
 
+    public List<Atendimento> findByAtendimento(Long idPaciente) {
+        var atendimento = atendimentoRepository.findByIdPaciente(idPaciente);
+        return atendimento;
+    }
 
 
     /*public void save(AtendimentoRequest atendimentoRequest) {

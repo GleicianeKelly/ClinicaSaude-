@@ -11,7 +11,7 @@ public class Atendimento implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private Long id;
+    private String uuid;
     private Long idPaciente;
     private Long idVacina;
     private LocalDateTime data;
@@ -19,12 +19,12 @@ public class Atendimento implements Serializable {
     public Atendimento() {
     }
 
-    public Long getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public Long getIdPaciente() {

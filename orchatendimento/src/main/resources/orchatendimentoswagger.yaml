@@ -1,0 +1,129 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "api de atendimento"
+  description: "Tem como objetivo salvar atendimento de um paciente"
+host: "localhost:8080"
+schemes:
+  - https
+tags:
+  - name: "AtendimentoOrchController"
+paths:
+  /atendimentoPaciente:
+    post:
+      tags:
+        - "AtendimentoOrchController"
+      summary: "salvar atendimento"
+      operationId: "saveAtendimento"
+      produces:
+        - application/json
+      description: "Esta operação tem como objetivo salvar atendimento"
+      parameters:
+        - in: "body"
+          name: "atendimentoDTO"
+          description: "salvar atendimento"
+          required: true
+          schema:
+            $ref: "#/definitions/AtendimentoDTO"
+
+      responses:
+        201:
+          description: "ok"
+          schema:
+            type: string
+        400:
+          description: "Consulta inválida"
+        401:
+          description: "Não foi possível credenciais para autenticação inválida"
+        404:
+          description: "Paciente não encontrado"
+        500:
+          description: "Erro interno"
+
+
+  /atendimentoPaciente/{cpfPaciente}:
+    get:
+      tags:
+        - "AtendimentoOrchController"
+      summary: "buscar atendimento pelo cpf do paciente"
+      operationId: "findByAtendimento"
+      produces:
+        - application/json
+      description: "Esta operação tem como objetivo buscar paciente por cpf"
+      parameters:
+        - in: "path"
+          name: "cpfPaciente"
+          type: string
+          required: true
+          description: "cpf do paciente"
+      responses:
+        200:
+          description: "ok"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/AtendimentoResponseDTO"
+        400:
+          description: "Consulta inválida"
+        401:
+          description: "Não foi possível credenciais para autenticação inválida"
+        404:
+          description: "Paciente não encontrado"
+        500:
+          description: "Erro interno"
+
+
+definitions:
+  AtendimentoDTO:
+    type: object
+    properties:
+      cpfPaciente:
+        type: string
+      nomeVacina:
+        type: string
+
+
+  AtendimentoResponseDTO:
+    type: object
+    properties:
+      id:
+        type: string
+        description: "Identificador do atendimento"
+      cpf:
+        type: "string"
+        description: "CPF do paciente"
+      endereco:
+        type: "string"
+        description: "Endereco do paciente"
+      nomePaciente:
+        type: "string"
+        description: "Nome do paciente"
+      nome:
+        type: "string"
+        description: "Nome da vacina"
+      marca:
+        type: "string"
+        description: "Marca da vacina"
+      lote:
+        type: "string"
+        description: "Lote da vacina"
+      data:
+        type: string
+        format: dateTime
+        description: "Hora que o atendimento foi cadastrado"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
